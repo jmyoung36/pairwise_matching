@@ -9,6 +9,16 @@ Created on Fri Jun 14 10:06:33 2019
 # method from 'Optimal Matching for Observational Studies' by Rosenbaum
 # https://www.jstor.org/stable/pdf/2290079.pdf
 
+# NB:
+# distances between subjects must be integer-valued to avoid numerical problems
+# with the min cost flow algorithm. Hence all distances, whether precomputed or
+# calculated on the fly, are converted to integers. In the case where all
+# distances lie within in a narrow range (e.g. zero to 1) this will generate
+# unpredictable results in the matching. To avoid this, if distance are very
+# similar, it is recommended to multiply the distances by a constant factor
+# (say 100 or 10,000) to increase the range wrt the nearest integer and to pass
+# the resulting set of distances in a precomputed matrix.
+
 # import what we need
 import pandas as pd
 import numpy as np
